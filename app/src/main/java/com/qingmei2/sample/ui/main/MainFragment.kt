@@ -13,6 +13,7 @@ import com.qingmei2.sample.R
 import com.qingmei2.sample.ui.main.home.HomeFragment
 import com.qingmei2.sample.ui.main.profile.ProfileFragment
 import com.qingmei2.sample.ui.main.repos.ReposFragment
+import com.qingmei2.sample.ui.main.trending.TrendingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -32,8 +33,8 @@ class MainFragment : BaseFragment() {
         isPortMode = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
         viewPager.adapter = ViewPagerAdapter(childFragmentManager,
-                listOf(HomeFragment(), ReposFragment(), ProfileFragment()))
-        viewPager.offscreenPageLimit = 2
+                listOf(HomeFragment(), ReposFragment(), TrendingFragment(),  ProfileFragment()))
+        viewPager.offscreenPageLimit = 3
 
         when (isPortMode) {
             true -> bindsPortScreen()
@@ -60,7 +61,8 @@ class MainFragment : BaseFragment() {
     private fun bindsLandScreen() {
         fabHome.setOnClickListener { onPageSelectChanged(0) }
         fabRepo.setOnClickListener { onPageSelectChanged(1) }
-        fabProfile.setOnClickListener { onPageSelectChanged(2) }
+        fabTrending.setOnClickListener { onPageSelectChanged(2) }
+        fabProfile.setOnClickListener { onPageSelectChanged(3) }
     }
 
     private fun onPageSelectChanged(index: Int) {
@@ -89,8 +91,11 @@ class MainFragment : BaseFragment() {
             R.id.nav_repos -> {
                 viewPager.currentItem = 1
             }
-            R.id.nav_profile -> {
+            R.id.nav_trending -> {
                 viewPager.currentItem = 2
+            }
+            R.id.nav_profile -> {
+                viewPager.currentItem = 3
             }
         }
     }

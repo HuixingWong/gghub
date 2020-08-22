@@ -16,11 +16,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+const val BASE_URL = "https://api.github.com/"
+const val BASE_TRENDING_URL = "https://ghapi.huchen.dev/"
+
 @Module
 @InstallIn(ApplicationComponent::class)
 object HttpModule {
     const val TIME_OUT_SECONDS = 10
-    const val BASE_URL = "https://api.github.com/"
 
     @Provides
     @Singleton
