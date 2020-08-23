@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.paging.PagedList
 import com.qingmei2.architecture.core.base.view.fragment.BaseFragment
-import com.qingmei2.architecture.core.ext.jumpBrowser
+import com.qingmei2.sample.utils.jumpBrowser
 import com.qingmei2.architecture.core.ext.observe
 import com.qingmei2.sample.R
 import com.qingmei2.sample.entity.Repo

@@ -8,7 +8,7 @@ import com.qingmei2.sample.entity.TrendingRepo
 
 @Database(
         entities = [ReceivedEvent::class, Repo::class, TrendingRepo::class],
-        version = 1
+        version = 2
 )
 abstract class UserDatabase : RoomDatabase() {
 
