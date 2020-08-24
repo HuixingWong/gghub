@@ -97,6 +97,7 @@ dependencies {
     // glide
     api Dependencies.glide
     kapt Dependencies.glideCompiler
+    api ("io.coil-kt:coil:0.12.0")
 
     // logger
     api Dependencies.timber
