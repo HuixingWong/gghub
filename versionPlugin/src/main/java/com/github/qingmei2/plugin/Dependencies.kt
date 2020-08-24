@@ -52,7 +52,8 @@ object Dependencies {
     const val cardview = "androidx.cardview:cardview:${Versions.appcompat}"
     const val annotations = "androidx.annotation:annotation:${Versions.appcompat}"
     const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03"
-    const val constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+    const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.0"
+    const val percentLayout = "androidx.percentlayout:percentlayout:1.0.0"
     const val flexbox = "com.google.android:flexbox:1.1.0"
 
     const val activity = "androidx.activity:activity:${Versions.jetpack_activity}"

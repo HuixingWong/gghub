@@ -58,6 +58,7 @@ dependencies {
     implementation Dependencies.recyclerview
     implementation Dependencies.materialDesign
     implementation Dependencies.constraintlayout
+    implementation Dependencies.percentLayout
     implementation Dependencies.flexbox
     implementation Dependencies.swiperefreshlayout
 

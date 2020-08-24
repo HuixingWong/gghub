@@ -1,14 +1,14 @@
 package com.qingmei2.sample.ui.main.trending.dataSource
 
-import androidx.paging.DataSource
 import androidx.room.withTransaction
 import com.qingmei2.architecture.core.base.repository.ILocalDataSource
 import com.qingmei2.sample.db.UserDatabase
 import com.qingmei2.sample.entity.TrendingRepo
+import javax.inject.Inject
 
-class LocalDataSource constructor(private val db: UserDatabase) : ILocalDataSource{
+class LocalDataSource @Inject constructor(private val db: UserDatabase) : ILocalDataSource{
 
-    fun fetchQueryTrendingFactory(): DataSource.Factory<Int, TrendingRepo>{
+    suspend fun fetchQueryTrendingFactory(): List<TrendingRepo>{
         return db.trendingDao().queryRepos()
     }
 

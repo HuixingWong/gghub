@@ -20,7 +20,8 @@ class SearchViewModel @ViewModelInject constructor(
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val mFlow = mMutableLiveData.asFlow().flatMapLatest { repository.fetchPager(it).flow.cachedIn(viewModelScope) }
+    val mFlow = mMutableLiveData.asFlow().
+    flatMapLatest { repository.fetchPager(it).flow.cachedIn(viewModelScope) }
 
 }
 
