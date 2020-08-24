@@ -79,10 +79,10 @@ class RepoPagedViewHolder(private val view: View) : RecyclerView.ViewHolder(view
                 .into(ivAvatar)
 
         view.setOnClickListener {
-            observer.postValue(data.htmlUrl)
+            observer.postValue(data.url)
         }
         btnAvatar.setOnClickListener {
-            observer.postValue(data.owner.htmlUrl)
+            observer.postValue(data.owner.url)
         }
 
         tvOwnerName.text = data.owner.login
