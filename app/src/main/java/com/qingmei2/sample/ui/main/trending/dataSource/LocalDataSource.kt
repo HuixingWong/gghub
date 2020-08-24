@@ -19,12 +19,6 @@ class LocalDataSource @Inject constructor(private val db: UserDatabase) : ILocal
         }
     }
 
-    suspend fun insertNewData(newPage: List<TrendingRepo>){
-        db.withTransaction {
-            insertDataInternal(newPage)
-        }
-    }
-
     private suspend fun insertDataInternal(newPage: List<TrendingRepo>){
         db.trendingDao().insert(newPage)
     }
