@@ -19,9 +19,7 @@ class TrendingRepository @Inject constructor
             emit(trendings.data)
             clearAndInsertNewData(trendings.data)
         }else{
-            fetchLocalTrending()?.let {
-                emit(it)
-            }
+            emit(fetchLocalTrending())
         }
     }
 

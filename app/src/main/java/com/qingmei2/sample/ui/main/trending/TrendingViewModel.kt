@@ -6,9 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import com.qingmei2.architecture.core.base.viewmodel.BaseViewModel
+import com.qingmei2.architecture.core.ext.setNext
 import com.qingmei2.sample.entity.request.TrendingRequestData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 
 class TrendingViewModel @ViewModelInject constructor(private val repository: TrendingRepository)
     : BaseViewModel() {
@@ -25,8 +27,21 @@ class TrendingViewModel @ViewModelInject constructor(private val repository: Tre
         })
     }
 
+    @ExperimentalCoroutinesApi
     val trendingList = Transformations.switchMap(trendingRequestData) {
-        repository.fetchTrending(it).flowOn(Dispatchers.Default).asLiveData()
+        repository.fetchTrending(it).flowOn(Dispatchers.Default).onStart {
+            _viewStateLiveData.setNext {
+                TrendingViewState(true, null)
+            }
+        }.catch {
+            _viewStateLiveData.setNext { _->
+                TrendingViewState(false, it)
+            }
+        }.onCompletion {
+            _viewStateLiveData.setNext {
+                TrendingViewState(false, null)
+            }
+        }.asLiveData()
     }
 
 }

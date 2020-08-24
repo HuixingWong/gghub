@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.qingmei2.architecture.core.base.view.fragment.BaseFragment
+import com.qingmei2.architecture.core.ext.observe
 import com.qingmei2.sample.ui.main.trending.adapter.TrendingAdapter
+import com.qingmei2.sample.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_trending.*
 
@@ -25,6 +27,9 @@ class TrendingFragment : BaseFragment() {
 
     private fun initViews() {
         mRecyclerView.adapter = trendingAdapter
+        mSwipeRefreshLayout.setOnRefreshListener {
+            viewModel.search()
+        }
     }
 
     private fun binds() {
@@ -32,7 +37,16 @@ class TrendingFragment : BaseFragment() {
         viewModel.trendingList.observe(viewLifecycleOwner, Observer {
            trendingAdapter.submitList(it)
         })
+        observe(viewModel.viewStateLiveData, this::onNewState)
     }
 
+    private fun onNewState(state: TrendingViewState) {
+        if (state.throwable != null) {
+            toast { "network failure." }
+        }
+        if (state.isLoading != mSwipeRefreshLayout.isRefreshing) {
+            mSwipeRefreshLayout.isRefreshing = state.isLoading
+        }
+    }
 
 }
