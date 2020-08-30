@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.qingmei2.sample.R
+import com.qingmei2.sample.di.BASE_URL
 import com.qingmei2.sample.entity.TrendingRepo
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -48,7 +49,7 @@ class TrendingAdapter: ListAdapter<TrendingRepo, TrendingAdapter.TrendingViewHol
         private val tvFork: TextView = view.findViewById(R.id.tvFork)
         fun binds(item: TrendingRepo,  observer: MutableLiveData<String>){
             view.setOnClickListener {
-                observer.postValue(item.url)
+                observer.postValue(BASE_URL + "repos/" +  item.author + "/"+item.name)
             }
             ivAvatar.load(item.avatar)
             tvOwnerName.text = item.author
