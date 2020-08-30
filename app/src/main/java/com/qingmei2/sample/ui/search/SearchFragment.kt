@@ -51,7 +51,10 @@ class SearchFragment : BaseFragment() {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?) = false
+            override fun onQueryTextChange(newText: String?): Boolean{
+                mViewModel.search(newText)
+                return false
+            }
         })
 
         // when button was clicked, scrolling list to top.

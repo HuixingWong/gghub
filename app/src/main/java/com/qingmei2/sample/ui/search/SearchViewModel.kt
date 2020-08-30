@@ -6,6 +6,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.qingmei2.architecture.core.base.viewmodel.BaseViewModel
 import com.qingmei2.sample.entity.Repo
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 
 class SearchViewModel @ViewModelInject constructor(
@@ -14,8 +17,11 @@ class SearchViewModel @ViewModelInject constructor(
 
     private val mSearchKeyLiveData = MutableLiveData<String>(SEARCH_KEY_DEFAULT)
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     val repoListLiveData: LiveData<PagingData<Repo>> =
-            mSearchKeyLiveData.asFlow().flatMapLatest { repository.fetchPager(it).flow.cachedIn(viewModelScope) }.asLiveData()
+            mSearchKeyLiveData.asFlow().debounce(1500)
+                    .flatMapLatest { repository.fetchPager(it).flow.cachedIn(viewModelScope) }.asLiveData()
 
     fun search(keyWord: String?) {
         if (!keyWord.isNullOrEmpty()) {
