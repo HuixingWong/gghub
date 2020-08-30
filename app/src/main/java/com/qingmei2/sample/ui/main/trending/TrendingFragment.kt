@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.qingmei2.architecture.core.base.view.fragment.BaseFragment
 import com.qingmei2.architecture.core.ext.observe
 import com.qingmei2.sample.ui.main.trending.adapter.TrendingAdapter
+import com.qingmei2.sample.utils.jumpBrowser
 import com.qingmei2.sample.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_trending.*
@@ -37,6 +38,8 @@ class TrendingFragment : BaseFragment() {
         viewModel.trendingList.observe(viewLifecycleOwner, Observer {
            trendingAdapter.submitList(it)
         })
+        // list item clicked event.
+        observe(trendingAdapter.getItemClickEvent(), requireActivity()::jumpBrowser)
         observe(viewModel.viewStateLiveData, this::onNewState)
     }
 

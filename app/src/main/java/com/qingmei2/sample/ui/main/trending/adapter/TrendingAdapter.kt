@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,17 +18,22 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 class TrendingAdapter: ListAdapter<TrendingRepo, TrendingAdapter.TrendingViewHolder>(TrendingDiffCallBack()) {
 
+    private val liveData: MutableLiveData<String> = MutableLiveData()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         return TrendingViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_rtendings_repo, parent, false))
     }
 
     override fun onBindViewHolder(holder: TrendingViewHolder, position: Int) {
-        holder.binds(getItem(position))
+        holder.binds(getItem(position), liveData)
+    }
+
+    fun getItemClickEvent(): LiveData<String> {
+        return liveData
     }
 
 
-    class TrendingViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class TrendingViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
         private val ivAvatar: ImageView = view.findViewById(R.id.ivAvatar)
         private val btnAvatar: ConstraintLayout = view.findViewById(R.id.btnAvatar)
 
@@ -39,7 +46,10 @@ class TrendingAdapter: ListAdapter<TrendingRepo, TrendingAdapter.TrendingViewHol
         private val tvStar: TextView = view.findViewById(R.id.tvStar)
         private val tvIssue: TextView = view.findViewById(R.id.tvIssue)
         private val tvFork: TextView = view.findViewById(R.id.tvFork)
-        fun binds(item: TrendingRepo){
+        fun binds(item: TrendingRepo,  observer: MutableLiveData<String>){
+            view.setOnClickListener {
+                observer.postValue(item.url)
+            }
             ivAvatar.load(item.avatar)
             tvOwnerName.text = item.author
             tvLanguage.text = item.language
