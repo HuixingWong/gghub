@@ -1,7 +1,9 @@
 package com.qingmei2.sample.ui.detail.repo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.qingmei2.sample.R
 
 class RepoDetailActivity : AppCompatActivity() {
@@ -10,9 +12,25 @@ class RepoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repo_detail_activity)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, RepoDetailFragment.newInstance())
-                    .commitNow()
+            val url = intent.getStringExtra("url")
+            initFragment(url)
+        }
+    }
+
+    private fun initFragment(url: String){
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, RepoDetailFragment.newInstance(url))
+                .commitNow()
+    }
+
+    companion object {
+        private const val TAG = "SearchFragment"
+
+        fun launch(activity: FragmentActivity, url: String) = activity.apply {
+            val intent = Intent(this, RepoDetailActivity::class.java).apply {
+                putExtra("url", url)
+            }
+            startActivity(intent)
         }
     }
 }
