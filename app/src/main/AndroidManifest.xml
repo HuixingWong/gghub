@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
-        <activity android:name=".ui.web.CommonWebViewActivity"></activity>
+        <activity android:name=".ui.detail.repo.RepoDetailActivity"></activity>
+        <activity android:name=".ui.web.CommonWebViewActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:launchMode="singleTop">

@@ -70,6 +70,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     debugImplementation Dependencies.leakCanaryDebug
     debugImplementation Dependencies.leakCanaryDebugSupport
