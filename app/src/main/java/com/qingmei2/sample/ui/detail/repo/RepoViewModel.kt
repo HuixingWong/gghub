@@ -1,7 +1,8 @@
 package com.qingmei2.sample.ui.detail.repo
 
-import androidx.lifecycle.ViewModel
+import com.qingmei2.architecture.core.base.viewmodel.BaseViewModel
 
-class RepoViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class RepoViewModel : BaseViewModel() {
+
+
 }

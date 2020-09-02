@@ -2,6 +2,7 @@ package com.qingmei2.sample.entity
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import com.qingmei2.sample.entity.repodetail.License
 import com.qingmei2.sample.utils.fromJson
 import com.qingmei2.sample.utils.toJson
 

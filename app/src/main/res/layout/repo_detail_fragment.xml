@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        app:title="@string/main_nav_trending"
+        app:title="@string/repo_detail"
         app:titleTextColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
